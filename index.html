@@ -7,16 +7,33 @@
     <title>Document</title>
   </head>
   <body>
-    <script
-      crossorigin
-      src="https://unpkg.com/react@18/umd/react.development.js"
-    ></script>
-    <script
-      crossorigin
-      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-    ></script>
-    <script>
-      const span = React.createElement("span");
-    </script>
+    <div id="root"></div>
   </body>
+  <script
+    crossorigin
+    src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.querySelector("#root");
+    let counter = 0;
+    function countUp() {
+      counter = counter + 1;
+      reRender();
+    }
+    function reRender() {
+      ReactDOM.render(<Container />, root);
+    }
+    const Container = () => (
+      <div>
+        <h3>Total clicks : {counter}</h3>
+        <button onClick={countUp}>click me</button>
+      </div>
+    );
+    ReactDOM.render(<Container />, root);
+  </script>
 </html>
