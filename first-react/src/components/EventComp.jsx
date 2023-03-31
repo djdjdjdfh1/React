@@ -7,7 +7,8 @@ export class EventComp extends Component {
         this.state = {
             name: "홍길동",
             address: "부산",
-            toggle: true
+            toggle: true,
+            color: ""
         }
 
         // 메소드에 .bind로 묶어서 this전달
@@ -16,6 +17,7 @@ export class EventComp extends Component {
         this.printEvent = this.printEvent.bind(this);
         this.printAddress = this.printAddress.bind(this);
         this.setToggle = this.setToggle.bind(this);
+        this.changeColor = this.changeColor.bind(this);
         //this.printEvent는 이름
         // 참고) let num = 0; num = num + 1; >> num의 결과: 1
         
@@ -40,6 +42,11 @@ export class EventComp extends Component {
     setToggle() {
         this.setState({toggle: !this.state.toggle})
       }
+
+    // this.setState 통해서 컬러값 수정
+    changeColor() {
+        this.setState({color: "red"});
+    } 
 
   render() {
     // render안에서 this = EventComp;
@@ -121,6 +128,17 @@ export class EventComp extends Component {
           >
             {this.state.toggle ? "on" : "off"}
           </button>
+
+          {/* state의 color : ""추가후
+            changeColor 메소드를 만들고,
+            메소드에서 this.state.color값을 "red"로 수정
+          */}
+          <p
+          onMouseEnter={this.changeColor}
+          style = {{color: this.state.color}}
+          >
+            p태그에 마우스를 올리면 글자를 빨간색으로 바꾸기
+          </p>
       </div>
     )
   }
