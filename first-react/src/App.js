@@ -11,6 +11,7 @@ import OtherComp from './components/OtherComp';
 
 import StateComp from './components/StateComp';
 import EventComp from './components/EventComp';
+import LoginCompo from './components/LoginCompo';
 
 // 리액트에서 오류가 뜨는 이유
 // 1. 존재하지 않는 컴퍼넌트 출력
@@ -41,6 +42,14 @@ function App() {
 
       {/* 이벤트 */}
       <EventComp/>
+
+      {/* LoginComp 작성후
+        state: name , login: false
+        <input>에서 name 받아오기
+        <button>에서 login true 만들기
+        <h1> name 출력 > login값이 true일때 화면에 출력
+      */}
+      <LoginCompo/>
     </div>
   );
 }

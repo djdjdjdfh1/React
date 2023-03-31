@@ -8,7 +8,10 @@ export class EventComp extends Component {
             name: "홍길동",
             address: "부산",
             toggle: true,
-            color: ""
+            color: "",
+            input: "",
+            inputNickname: "",
+            inputBook: ""
         }
 
         // 메소드에 .bind로 묶어서 this전달
@@ -44,9 +47,37 @@ export class EventComp extends Component {
       }
 
     // this.setState 통해서 컬러값 수정
-    changeColor() {
-        this.setState({color: "red"});
+    changeColor(e) {
+        // e.type을 통해서 setState에 값 다르게 넣을수 있다
+        // onMouseLeave에 changeColor를 추가하여
+        // onMouseLeave 이벤트가 발생했을때는 color: ""
+
+        if(e.type === "mouseenter") {
+            this.setState({color: "red"});
+        } else if(e.type === "mouseleave") {
+            this.setState({color: ""})
+        }
+        console.log(e.type);
     } 
+
+    // 화살표 함수를 가지는 메소드
+    // 메소드 이름에 화살표 함수 작성
+    arrowPrint = () => {
+      console.log("이벤트 실행");
+      console.log(this.state.name);
+    }
+
+    changeName = () => {
+      this.setState({name: "성춘향"})
+    }
+
+    // onchange 공용메소드
+    onInputChange= (e) => {
+        // inputNickname을 그대로 사용 > inputNickname에만 값이 들어감
+        // e.target.name : name속성값을 가져와서 사용
+        // 변수값을 사용하려면 [] 사용가능
+        this.setState({[e.target.name] : e.target.value})
+    }
 
   render() {
     // render안에서 this = EventComp;
@@ -135,10 +166,67 @@ export class EventComp extends Component {
           */}
           <p
           onMouseEnter={this.changeColor}
+          onMouseLeave={this.changeColor}
           style = {{color: this.state.color}}
           >
             p태그에 마우스를 올리면 글자를 빨간색으로 바꾸기
           </p>
+
+          {/* 화살표함수로 메소드 만들어서 사용하기 */} 
+          <button
+          onClick={this.arrowPrint}
+          >
+            화살표 함수를 사용한 이벤트
+          </button>
+
+          <button
+          onClick={()=>{
+            console.log("이벤트 실행");
+            console.log(this.state.name);
+          }}
+          >
+            화살표 함수를 사용한 이벤트
+          </button>
+
+          {/* 화살표 함수를 이용해서
+            버튼을 클릭했을때 name값을 성춘향으로 바꾸기
+          */}
+          <button
+          onClick={this.changeName}
+          >
+            {name}
+          </button>
+
+          {/* form - input 태그의 값 사용하기 */}
+          <h3>input태그에서 값을 가져올 state를 onChange를 사용해서 수정</h3>
+          <p>{this.state.input}</p>
+          <input 
+          type="text"
+          onChange={(e) => {
+            console.log(e.target.value)
+            this.setState({input: e.target.value})
+            // setState는 비동기로 움직이므로 
+            // 바로 state에 접근해서 값을 출력하면 이전값이 나온다
+            console.log("input",this.state.input)
+          }}
+          />
+
+          {/* change 공용함수 만들기 : 사용하지않아도 상관x */}
+          <h3>input 2개에서 값 받아오기</h3>
+          <p>inputNickname의 값: {this.state.inputNickname}</p>
+          <input
+           name= 'inputNickname' // state의 속성이름과 동일
+           type="text" 
+           onChange={ this.onInputChange }
+           />
+           <p>inputBook의 값: {this.state.inputBook}</p>
+           <input 
+           name='inputBook'
+           type="text" 
+           onChange={ this.onInputChange }
+           />
+
+
       </div>
     )
   }
