@@ -13,6 +13,9 @@ import StateComp from './components/StateComp';
 import EventComp from './components/EventComp';
 import LoginCompo from './components/LoginCompo';
 
+import RefDomEvent from './components/RefDomEvent';
+
+import MapComp from './components/MapComp';
 // 리액트에서 오류가 뜨는 이유
 // 1. 존재하지 않는 컴퍼넌트 출력
 // (컴퍼넌트를 만든 이후에 이름은 가능하면 바꾸지 말 것)
@@ -50,6 +53,12 @@ function App() {
         <h1> name 출력 > login값이 true일때 화면에 출력
       */}
       <LoginCompo/>
+
+      {/* RefDom */}
+      <RefDomEvent/>
+      
+      {/* 컴퍼넌트의 반복 */}
+      <MapComp/>
     </div>
   );
 }
