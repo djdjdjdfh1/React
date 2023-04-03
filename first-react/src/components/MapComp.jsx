@@ -14,6 +14,9 @@ export class MapComp extends Component {
         ],
         inputText : "" //onChange이용해서 input의value값 가져옴
     };
+    // 수정될때마다 값이 화면에 표현되지않고
+    // 값을 저장하고 싶을때
+    this.id = 5;
   }
 
   addStudent = ()=>{
@@ -39,11 +42,13 @@ export class MapComp extends Component {
     // 1씩 증가 > 배열의 길이값 1씩 증가
     const newStudents = this.state.students.concat(
         {
-            id : this.state.students.length+1, 
+            id : this.id,
             name:this.state.inputText
         }
     )
     this.setState({students:newStudents});
+    // 속성값에 직접 접근해서 1증가
+    this.id++;
 
     // input태그에 value={} state값으로 연결하면 
     // setState를 통해서 값을 수정할수 있다.
@@ -51,7 +56,17 @@ export class MapComp extends Component {
     // 아래와 같이 함께 적어도 된다.
     // this.setState({students:newStudents, inputText:""});
     this.setState({inputText :""})
+}
 
+// 전달해준 값을 사용하기위해서 매개변수로 받아오기
+  deleteStudent = (student) => {
+    // 1. 배열에서 값을 제거하는 방법
+    // 1) pop, splice .. > 원래값에 제거 X
+    // 2) 값을 제거하고 새로운 배열 생성 : filter
+    // filter(걸러냄) 
+    // : (value)=>return 참 일때 value값을 return 한 새 배열에 추가
+    const newStudents = this.state.students.filter((s)=>s.id !== student.id);
+    this.setState({students : newStudents})
 }
 
   render() {
@@ -106,16 +121,8 @@ export class MapComp extends Component {
                             <td>{student.id}</td>
                             <td 
                                 // 이름을 눌렀을때 이름을 가진 객체를 배열에서 삭제
-                                onClick={()=>{
-                                    // 1. 배열에서 값을 제거하는 방법
-                                    // 1) pop, splice .. > 원래값에 제거 X
-                                    // 2) 값을 제거하고 새로운 배열 생성 : filter
-                                    // filter(걸러냄) 
-                                    // : (value)=>return 참 일때 value값을 return 한 새 배열에 추가
-                                    const newStudents = this.state.students.filter((s)=>s.id !== student.id);
-                                    this.setState({students : newStudents})
-
-                                }} 
+                                // student의 값을 전달하기위해서 화살표함수로 감싸기
+                                onClick={()=>{this.deleteStudent(student)}} 
                             >
                                 {student.name}
                             </td>

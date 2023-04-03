@@ -16,6 +16,8 @@ import LoginCompo from './components/LoginCompo';
 import RefDomEvent from './components/RefDomEvent';
 
 import MapComp from './components/MapComp';
+
+import MemoComp from './components/MemoComp';
 // 리액트에서 오류가 뜨는 이유
 // 1. 존재하지 않는 컴퍼넌트 출력
 // (컴퍼넌트를 만든 이후에 이름은 가능하면 바꾸지 말 것)
@@ -56,9 +58,20 @@ function App() {
 
       {/* RefDom */}
       <RefDomEvent/>
-      
+
       {/* 컴퍼넌트의 반복 */}
       <MapComp/>
+
+      {/* 기록장 작성 
+        memoList : [
+          {id:1, memo:"기록", time:new Date()},
+          {id:2, memo:"연습", time:new Date()},
+        ]
+        state를 이용하여, memoList의 내용을 map으로
+        li태그에 출력하세요
+        input 태그로 입력, button 클릭 추가, li 클릭 삭제
+      */}
+      <MemoComp/> 
     </div>
   );
 }
