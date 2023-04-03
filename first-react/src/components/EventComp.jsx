@@ -82,7 +82,7 @@ export class EventComp extends Component {
   render() {
     // render안에서 this = EventComp;
     // this.state는 construct의 속성값
-     const {name} = this.state;
+    const {name} = this.state;
 
     return (
         // 이벤트를 위한 버튼 작성
