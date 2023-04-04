@@ -18,6 +18,8 @@ import RefDomEvent from './components/RefDomEvent';
 import MapComp from './components/MapComp';
 
 import MemoComp from './components/MemoComp';
+
+import LifeCycle from './components/LifeCycle';
 // 리액트에서 오류가 뜨는 이유
 // 1. 존재하지 않는 컴퍼넌트 출력
 // (컴퍼넌트를 만든 이후에 이름은 가능하면 바꾸지 말 것)
@@ -72,6 +74,9 @@ function App() {
         input 태그로 입력, button 클릭 추가, li 클릭 삭제
       */}
       <MemoComp/> 
+
+      {/* 라이프사이클 */}
+      <LifeCycle/>
     </div>
   );
 }

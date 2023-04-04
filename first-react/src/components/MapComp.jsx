@@ -149,7 +149,7 @@ export default MapComp
 /* map에서 사용할 컴포넌트 */
 class TableComp extends Component {
     // 호출하는 컴포넌트(부모)에서 값을 받아서 씀 : props
-    render(){
+    render(){ 
         const {id, name} = this.props
         return (
             <tr>
