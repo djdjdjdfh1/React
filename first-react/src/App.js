@@ -20,6 +20,13 @@ import MapComp from './components/MapComp';
 import MemoComp from './components/MemoComp';
 
 import LifeCycle from './components/LifeCycle';
+
+import ArrowComponent from './components/ArrowComponent';
+import ArrowTest from './components/ArrowTest';
+import ArrowState from './components/ArrowState';
+
+import PropsComp from './components/PropsComp';
+import CountPropsComp from './components/CountPropsComp';
 // 리액트에서 오류가 뜨는 이유
 // 1. 존재하지 않는 컴퍼넌트 출력
 // (컴퍼넌트를 만든 이후에 이름은 가능하면 바꾸지 말 것)
@@ -77,6 +84,30 @@ function App() {
 
       {/* 라이프사이클 */}
       <LifeCycle/>
+
+      {/* 함수형 컴퍼넌트 */}
+      <ArrowComponent text = "문자열을 전달" />
+      <ArrowComponent>children으로 전달</ArrowComponent>
+
+      {/* 함수형 컴퍼넌트 실습
+        아래 컴퍼넌트를 함수형으로 만들고 출력하기
+        name = "green" : h3 태그로 출력,
+        childeren = "환영합니다" : p 태그로 출력
+        check={true} : check값이 true일때 name 출력
+      */}
+      <ArrowTest
+      name = "green"
+      check = {true}
+      >
+        환영합니다
+      </ArrowTest>
+
+      {/* 함수형 컴퍼넌트의 state 사용 */}
+      <ArrowState />
+
+      <PropsComp color="blue">props값을 받아와서 글자색을 바꿉니다</PropsComp>
+
+      <CountPropsComp num = {20}/>
     </div>
   );
 }
