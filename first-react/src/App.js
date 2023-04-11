@@ -27,6 +27,9 @@ import ArrowState from './components/ArrowState';
 
 import PropsComp from './components/PropsComp';
 import CountPropsComp from './components/CountPropsComp';
+
+import EffectHook from './components/EffectHook';
+import EffectHook2 from './components/EffectHook2';
 // 리액트에서 오류가 뜨는 이유
 // 1. 존재하지 않는 컴퍼넌트 출력
 // (컴퍼넌트를 만든 이후에 이름은 가능하면 바꾸지 말 것)
@@ -108,6 +111,12 @@ function App() {
       <PropsComp color="blue">props값을 받아와서 글자색을 바꿉니다</PropsComp>
 
       <CountPropsComp num = {20}/>
+
+      {/* 함수형컴퍼넌트의 hook 사용 */}
+      <EffectHook />
+
+      {/* 함수형 컴퍼넌트의 useEffect응용 */}
+      <EffectHook2 />
     </div>
   );
 }
