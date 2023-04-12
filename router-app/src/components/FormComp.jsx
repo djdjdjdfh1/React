@@ -15,7 +15,7 @@ export default function FormComp() {
             // 라우터를 이용하여 이동
             // Link 컴퍼넌트 사용불가
             // navigate를 통해서, 주소이동 가능
-            navigate(`/about`);
+            navigate(`/about?name=${input}`);
         }}>
             <label htmlFor="">이름</label>
             <input type="text" name='name'
