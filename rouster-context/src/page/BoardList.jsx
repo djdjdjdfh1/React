@@ -2,6 +2,7 @@ import React from 'react'
 import data from '../data/dummy.json'
 
 import {useState} from 'react'
+import { Link } from 'react-router-dom';
 
 export default function BoardList() {
     const [dataList, setDataList] = useState(data);
@@ -11,7 +12,11 @@ export default function BoardList() {
     <ul>
         {
             dataList.map((data)=>(
-                <li>{data.title}</li>
+                <li key={data.id}>
+                    <Link to={`/boardlist/${data.id}`}>
+                        {data.title}
+                    </Link>
+                </li>
             ))
         }
     </ul>
