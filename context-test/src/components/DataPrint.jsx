@@ -8,6 +8,7 @@ import { useState } from 'react';
 // DataContext를 받아와서 name을 수정할수 있게하기
 export default function DataPrint() {
   const value = useContext(DataContext);
+  // 비구조화, {action} 은 속성값을 뺴온것. action이라고 저장햇으면 밑에 action.action.setName 써야함.
   const {action} = value;
 
   const [input,setInput] = useState("");
