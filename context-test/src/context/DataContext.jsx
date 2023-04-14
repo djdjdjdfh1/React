@@ -9,6 +9,7 @@ const DataContext = React.createContext(null);
 
 // App.js에서 값 전달할때
 // DataContext.Provider를 이용하여 값 전달
+
 // 이 공간에서 값을 추가한 Provider 작성후 내보냄
 // provider는 컴퍼넌트 형태
 // children : DataContext.Provider 사이에 컴퍼넌트
