@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'BookkMyungjo-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+.nav-box {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 60px;
+    width: 100%;
+    /* 포지션 픽스드 되면서 화면에 고정값이 사라져서 밑의 메인 컴퍼넌트가 위로 올라옴*/
+    position: fixed;
+}
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: 'BookkMyungjo-Bd';
+    padding: 0 20px;
+}
+.nav-box>a:first-child{
+    font-size: 2rem;
+}

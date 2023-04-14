@@ -1,0 +1,53 @@
+/* 부크크명조 */
+@font-face {
+    font-family: 'BookkMyungjo-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+div {
+    font-family: 'BookkMyungjo-Bd';
+}
+.background-img{
+    background-image: url(../img/0.jpg);
+    background-size: 100%;
+    height: 100vh;
+    width: 50%;
+    float: left;
+}
+.background-letter {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    height: 100vh;
+    text-align: center;
+}
+.background-letter> h1 {
+    font-size: 2rem;
+    padding-top: 300px;
+}
+.background-letter p {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.background2-img {
+    clear: both;
+    background-image: url(../img/1.jpg);
+    background-size: 100%;
+    height: 100vh;
+    width: 50%;
+    float: right;
+}
+.background2-letter {
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 100vh;
+    color: white;
+    text-align: center;
+}
+.background2-letter h1{
+    font-size: 2rem;
+    padding-top: 300px;
+}
+.background2-letter p {
+    margin-top: 20px;
+    margin-left: 20px;
+}
