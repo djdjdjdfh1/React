@@ -2,25 +2,22 @@ import logo from './logo.svg';
 import './App.css';
 import {Routes, Route} from 'react-router-dom'
 
-import NavBar from './components/NavBar';
-import Main from './page/Main';
-import Main2 from './page/Main2';
+import Layout from './page/Layout';
+import Main from './page/Main'
 import Home from './page/Home';
-import About from './page/About';
-import Story from './page/Story';
+import Menu from './page/Menu';
 import Like from './page/Like';
 
 function App() {
   return (
     <div>
-      <NavBar />
       <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/main2' element={<Main2 />}/>
-        <Route path='/home' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/story' element={<Story />}/>
-        <Route path='/like' element={<Like />} />
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<Main />} />
+          <Route path='/home' element={<Home />}/>
+          <Route path='/menu' element={<Menu />}/>
+          <Route path='/like' element={<Like />} />
+        </Route>
       </Routes>
     </div>
   );

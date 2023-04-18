@@ -102,7 +102,7 @@ function App() {
       name = "green"
       check = {true}
       >
-        환영합니다
+        환영합니다 
       </ArrowTest>
 
       {/* 함수형 컴퍼넌트의 state 사용 */}

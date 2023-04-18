@@ -5,7 +5,7 @@ export default function Home() {
     const [menuList, setMenuList] = useState([]);
     const getMenu = async()=> {
     const promise = await fetch(
-      "http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=kbdzVMi2epmiXU2EiAFMtH8wc1aeUX7uisnfxHS26jeglsuSc0rdvJJbCYWgZfO5YlhZy0Bi%2Fl9XO9ufa5xdgQ%3D%3D&numOfRows=50&pageNo=3&resultType=json"
+      "http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=kbdzVMi2epmiXU2EiAFMtH8wc1aeUX7uisnfxHS26jeglsuSc0rdvJJbCYWgZfO5YlhZy0Bi%2Fl9XO9ufa5xdgQ%3D%3D&numOfRows=150&pageNo=1&resultType=json"
       );
     const response = await promise.json();
     setMenuList(response.getFoodKr.item);

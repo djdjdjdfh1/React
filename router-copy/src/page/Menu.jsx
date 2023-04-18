@@ -1,15 +1,14 @@
 import React from 'react'
+import '../css/menu.css'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import '../css/menu.css'
 
-export default function Like() {
-  const [heart, setHeart] = useState(true);
+export default function Menu() {
   const [menuList,setMenuList] = useState([]);
 
   const getMenu = async()=> {
     const promise = await fetch(
-      "http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=kbdzVMi2epmiXU2EiAFMtH8wc1aeUX7uisnfxHS26jeglsuSc0rdvJJbCYWgZfO5YlhZy0Bi%2Fl9XO9ufa5xdgQ%3D%3D&numOfRows=8&pageNo=2&resultType=json"
+      "http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=kbdzVMi2epmiXU2EiAFMtH8wc1aeUX7uisnfxHS26jeglsuSc0rdvJJbCYWgZfO5YlhZy0Bi%2Fl9XO9ufa5xdgQ%3D%3D&numOfRows=8&pageNo=1&resultType=json"
       );
     const response = await promise.json();
     setMenuList(response.getFoodKr.item);
@@ -28,24 +27,22 @@ export default function Like() {
 
   return (
     <div>
-        <h1>Like</h1>
-        <p>좋아요 페이지입니다</p>
+        <h1>음식종류</h1>
+        <p>음식종류 페이지입니다</p>
         <br />
         <br />
         <br />
-        <br />
+        <div className='menu-header'>
+           <h1>전체</h1>
+           <p>리뷰 많은 순</p>
+        </div>
         <div className='box-wrap'>
-          {loading && menuList.map((item, index)=>(
+          {loading && menuList.map((item)=>(
             <div 
             key={item.UC_SEQ}
             className='img-box'
             >
-              <div 
-              className={ heart ? "like" : "click-like"}
-              onClick={() => {
-
-              }}
-              ></div>
+              <div className='like'></div>
               {/*<img src={item.MAIN_IMG_THUMB}></img>}*/}
               <div className='img' style={{backgroundImage: `url(${item.MAIN_IMG_THUMB})`}}></div>
               <h3>{item.MAIN_TITLE}</h3>

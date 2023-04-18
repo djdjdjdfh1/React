@@ -1,0 +1,48 @@
+h1 {
+    font-size: 2rem;
+}
+
+.box-wrap {
+    max-width: 1200px;
+    margin: auto;
+}
+.img-box {
+    display: inline-block;
+    width: 280px;
+    height: 350px;
+    background-color: lightgray;
+    border-radius: 20px;
+    text-align: center;
+    margin: 10px; 
+}
+.img-box .img {
+    margin: auto;
+    width: 250px;    
+    height: 250px;
+    background-size: cover;
+}
+.img-box h3 {
+    margin-top: 10px;
+}
+.img-box p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+}
+.like {
+    background-image: url(../img/heart.svg);
+    width: 20px;
+    height: 20px;
+    margin: 5px 0 0 5px;
+}
+.click-like {
+    background-image: url(../img/heart1.svg);
+    width: 20px;
+    height: 20px;
+    margin: 5px 0 0 5px;
+}

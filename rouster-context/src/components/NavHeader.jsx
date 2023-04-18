@@ -6,6 +6,7 @@ export default function NavHeader() {
     <div>
         <Link to='/'>HOME</Link>
         <Link to='/boardlist'>BOARD</Link>
+        <Link to='/boardwriteform'>WRITE</Link>
     </div>
   )
 }
