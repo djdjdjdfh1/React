@@ -34,6 +34,7 @@ h1 {
     display: flex;
     justify-content: space-between;
 }
+/* 좋아요 이모티콘 */
 .like {
     background-image: url(../img/heart.svg);
     width: 20px;
@@ -45,4 +46,27 @@ h1 {
     width: 20px;
     height: 20px;
     margin: 5px 0 0 5px;
+}
+/* 모달창 라이트박스 */
+.light-box-off {
+    display: none;
+}
+.light-box-on {
+    width: 100%;
+    height: 100%;
+    position: fixed;    
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: block;
+}
+.light-box-on div {
+    width: 40%;
+    height: 100%;
+    margin: auto;
+    background-color: gray;
+}
+.light-box-on img {
+    margin-top: 30px;
+    width: 68%;
 }

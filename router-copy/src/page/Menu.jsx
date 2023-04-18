@@ -4,6 +4,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 export default function Menu() {
+  const [heart, setHeart] = useState([]);
+
+  const [lightimg, setLightimg] = useState();
+
   const [menuList,setMenuList] = useState([]);
 
   const getMenu = async()=> {
@@ -36,15 +40,54 @@ export default function Menu() {
            <h1>전체</h1>
            <p>리뷰 많은 순</p>
         </div>
+
         <div className='box-wrap'>
           {loading && menuList.map((item)=>(
             <div 
             key={item.UC_SEQ}
             className='img-box'
-            >
-              <div className='like'></div>
+            > 
+              {/* 좋아요 이모티콘 */}
+              <div 
+              className={ heart.find((h)=>(h === item.UC_SEQ)) ? "click-like" : "like"}
+              onClick={() => {
+                if(heart.find((h)=>(h === item.UC_SEQ))) {
+                  const remainHeart = heart.filter((h)=>(h !== item.UC_SEQ))
+                  setHeart(remainHeart);
+                } else {
+                  const addHeart = heart.concat(item.UC_SEQ)
+                  setHeart(addHeart);
+                }
+              }}
+              >
+              </div>
+
               {/*<img src={item.MAIN_IMG_THUMB}></img>}*/}
-              <div className='img' style={{backgroundImage: `url(${item.MAIN_IMG_THUMB})`}}></div>
+              <div className={lightimg ? 'light-box-on' : 'light-box-off'}
+              onClick={()=>{
+                setLightimg(null);
+              }}
+              > 
+                <div >
+                  <img src={lightimg}></img>
+                  <br />
+                  <label htmlFor="">닉네임</label>
+                  <input type="text" />
+                  <br />
+                  <label htmlFor="">내용</label>
+                  <input type="text" />
+                  <br />
+                  <button>등록</button>
+                </div> 
+              </div>
+
+              <div className= 'img' 
+              style={{backgroundImage: `url(${item.MAIN_IMG_THUMB})`}}
+              onClick={()=>{
+                setLightimg(item.MAIN_IMG_THUMB)
+              }}              
+              >
+              </div>
               <h3>{item.MAIN_TITLE}</h3>
               <p>{item.ITEMCNTNTS}</p>
             </div>

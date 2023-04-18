@@ -8,10 +8,15 @@ import DataContext from '../context/DataContext';
 export default function Board() {
     // useNavigate를 사용하면 함수를 이용해서 화면이동가능
     const navigate = useNavigate();
-    const {state} = useContext(DataContext);
+
+    // param으로 들고온 값은 string
+    const {id} = useParams();
+
+    // context의 값을 가져옴
+    // 삭제를 위해 action 속성도 가져옴
+    const {state, action} = useContext(DataContext);
     const {boardlist} = state;
 
-    const {id} = useParams();
     // 배열의 함수인 find를 이용하여
     // 함수의 조건이 참인 하나의 값을 가져온다
     // find로 가져온 값은 배열안에 있는 하나의 값
@@ -28,6 +33,20 @@ export default function Board() {
         }
     },[])
 
+    // 게시물 삭제 메소드
+    const deleteBoard = () => {
+        // 1. 현재 id를 들고온다 > useParam을 통해 가져온 id를 들고온다
+        // 2. id와 동일한 객체를 제외한 새로운 배열을 만든다
+        // filter
+        // 일치 비교연산자 사용할떄는 자료형까지 동일해야한다
+    const newBoardlist = boardlist.filter((board)=>(board.id !== Number(id)))
+        // 3. 새로운 배열을 set메소드를 통해 넣어준다
+    action.setBoardlist(newBoardlist);
+
+        // 삭제 이후에 boardlist로 이동
+    navigate('/boardlist')
+    }
+
   return (
     <div>
         {   // 화면이 먼저 화면에 렌더되고, useEffect 실행
@@ -41,6 +60,30 @@ export default function Board() {
                     <p>날짜: {boardData.date}</p>
                 </div>
             )
+        }
+        {/* writer 값이 같을때만 아래 버튼들 보이기-삼항연산자 
+            boardData의 값이 있을때 비교!
+            먼저는 boardData가 있는지 확인한 후에 출력
+            >> 연달아서 확인하기위해 && 연산자 사용
+            1) boardData가 있는지 확인 (있으면 T/ 없으면 F)
+            2) writer 비교 
+        */}
+        {
+            boardData &&
+            state.user.writer === boardData.writer && 
+            <div>       
+                <button
+                onClick={deleteBoard}
+                >
+                    이 게시글 삭제
+                </button>
+                <button
+                // navigate의 state를 이용하여 boardData 객체를 전달
+                onClick={()=>{navigate(`/board-modify-form`, {state: boardData} )}}
+                >
+                    이 게시글 수정하기
+                </button>
+            </div>
         }
     </div>
   )
