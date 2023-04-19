@@ -25,6 +25,12 @@ export default function Board() {
     // undefined의 값에 속성을 찾으려고하면 >> 오류!
     const boardData = boardlist.find((d)=>(d.id == id))
 
+    // state의 commentlist에서 boardId와 param의 id값이 같은
+    // 새로운 배열작성 filter
+    const boardCommentlist = state.commentlist.filter(
+        (comment)=>(comment.boardId == id)
+    )
+
     // useEffect를 사용해서 boardData값이 undefined면 
     // 오류 페이지 컴퍼넌트로 이동 혹은 목록으로 이동
     // 두번쨰 인자값이 빈 배열이라면 컴퍼넌트 생성시에 실행
@@ -87,7 +93,15 @@ export default function Board() {
             </div>
         }
         <hr />
-        <CommentComp/>
+        {   // 값을 넘길 형태가 객체로 주어져있으면 객체로 넘길수 있다
+            // state의 commentlist를 그대로 쓰게되면 전체가 나옴
+            // >> 동일한 boardId를 가진 commentlist를 만들어야함
+            boardCommentlist.map((comment)=>(
+                <CommentComp 
+                comment={comment}
+                />
+            ))
+        }
     </div>
   )
 }
