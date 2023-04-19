@@ -3,6 +3,7 @@ import { useParams, useNavigate} from 'react-router-dom'
 import data from '../data/dummy.json'
 
 import DataContext from '../context/DataContext';
+import CommentComp from '../components/CommentComp';
 
 // id로 구분하기위해 board에 data 내용이 필요함
 export default function Board() {
@@ -51,7 +52,7 @@ export default function Board() {
     <div>
         {   // 화면이 먼저 화면에 렌더되고, useEffect 실행
             // 화면상에서 나타나는 오류를 제거하고
-            // useEffect로 이동
+            // useEffect로 이동 
             boardData && (
                 <div>
                     <h3>제목: {boardData.title}</h3>
@@ -85,6 +86,8 @@ export default function Board() {
                 </button>
             </div>
         }
+        <hr />
+        <CommentComp/>
     </div>
   )
 }

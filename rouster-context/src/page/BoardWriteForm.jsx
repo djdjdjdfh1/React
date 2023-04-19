@@ -32,7 +32,7 @@ export default function BoardWriteForm() {
             date : "2023-04-18",
             // DataContext에 들어가있는 user의 writer값
             // 로그인 했다면 : 작성한 writer , 로그인 안했다면 : "익명"
-            writer : state.user.writer
+            writer : state.user.writer // "green"
         }
         
         // 1-1. id값을 1추가
@@ -53,8 +53,7 @@ export default function BoardWriteForm() {
     <div>
         <h3>BoardWriteForm</h3>
         <label htmlFor="">제목</label>
-        <input type="text" 
-            onChange={(e)=>{setTitle(e.target.value)}}
+        <input type="text" onChange={(e)=>{setTitle(e.target.value)}}
         />
         <br />
         <textarea name="" id="" cols="30" rows="10"

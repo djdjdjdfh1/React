@@ -40,10 +40,29 @@ const DataProvider = ({children}) => {
         {writer: "익명", login: false}
     )
 
+    // commentlist 값 저장
+    // id, text, date, writer, boardId
+    const [commentlist, setCommentlist] = useState([
+        {
+            cid : 1,
+            boardId : 1,
+            text : "첫번째 게시글의 코멘트입니다",
+            date : "2023-04-19",
+            writer : "green"
+        },
+        {
+            cid : 2,
+            boardId : 3,
+            text : "세번째 게시글의 코멘트입니다",
+            date : "2023-04-19",
+            writer : "green"
+        }
+    ]);
+
     // value에 담을 데이터 정리
     const value = {
-        state : {boardlist, id, user},
-        action : {setBoardlist, setId, setUser}
+        state : {boardlist, id, user, commentlist},
+        action : {setBoardlist, setId, setUser, setCommentlist}
     }
 
     return (
