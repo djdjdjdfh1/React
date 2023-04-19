@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
 import data from '../data/dummy.json'
 
@@ -17,6 +17,9 @@ export default function Board() {
     // 삭제를 위해 action 속성도 가져옴
     const {state, action} = useContext(DataContext);
     const {boardlist} = state;
+
+    // 코멘트의 작성할 글을 저장하기위한 공간
+    const [text, setText] = useState("");
 
     // 배열의 함수인 find를 이용하여
     // 함수의 조건이 참인 하나의 값을 가져온다
@@ -52,6 +55,26 @@ export default function Board() {
 
         // 삭제 이후에 boardlist로 이동
     navigate('/boardlist')
+    }
+
+    // 코멘트 추가 메소드
+    const addComment = () => {
+        // 1. 추가할 코멘트 객체 생성
+        const newComment = {
+            cid : state.cid,
+            boardId : boardData.id,
+            text : text,
+            date : "2023-04-19",
+            writer : state.user.writer
+        }
+        // 1-1. 값 증가
+        action.cidCount();
+        
+        // 2. 코멘트가 추가된 새로운 배열
+        const newCommentlist = state.commentlist.concat(newComment);
+
+        // 3. 새로운 배열을 set메소드를 통해서 값 할당
+        action.setCommentlist(newCommentlist)
     }
 
   return (
@@ -93,11 +116,22 @@ export default function Board() {
             </div>
         }
         <hr />
+        {/* 코멘트를 작성할 공간 */}
+        <input type="text" 
+            onChange={(e)=>{setText(e.target.value)}}
+        />
+        <button
+            onClick={addComment}
+        >
+            댓글추가
+        </button>
+        <hr />
         {   // 값을 넘길 형태가 객체로 주어져있으면 객체로 넘길수 있다
             // state의 commentlist를 그대로 쓰게되면 전체가 나옴
             // >> 동일한 boardId를 가진 commentlist를 만들어야함
             boardCommentlist.map((comment)=>(
                 <CommentComp 
+                key={comment.cid}
                 comment={comment}
                 />
             ))
