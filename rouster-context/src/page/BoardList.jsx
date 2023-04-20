@@ -19,6 +19,8 @@ export default function BoardList() {
         {
             value.state.boardlist.map((data) => (
                 <li key={data.id}>
+                    <span>🤍</span>
+                    <span>❤</span>
                     <Link to={`/boardlist/${data.id}`}>
                         {data.title}
                     </Link>
