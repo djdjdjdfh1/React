@@ -2,32 +2,56 @@ import React from 'react'
 import '../css/menu.css'
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useContext } from 'react';
+import JsonData from '../context/JsonData';
 
 export default function Menu() {
+  const value = useContext(JsonData);
+  const {state, action, func} = value;
+  const {menuList, commentList, num} = state;
+  const {setNum, setCommentList} = action;
+  const {getMenu} = func;
+  const [preComment, setPreComment] = useState("");
+
   const [heart, setHeart] = useState([]);
-
   const [lightimg, setLightimg] = useState();
-
-  const [menuList,setMenuList] = useState([]);
-
-  const getMenu = async()=> {
-    const promise = await fetch(
-      "http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=kbdzVMi2epmiXU2EiAFMtH8wc1aeUX7uisnfxHS26jeglsuSc0rdvJJbCYWgZfO5YlhZy0Bi%2Fl9XO9ufa5xdgQ%3D%3D&numOfRows=8&pageNo=1&resultType=json"
-      );
-    const response = await promise.json();
-    setMenuList(response.getFoodKr.item);
-  }
+  const [text, setText] = useState("");
 
   const [loading, setLoading] = useState(false);
-  useEffect(()=>{getMenu();}, [])
+
+  const addComment = (c) => {
+    const newComment = {
+      cid : num,
+      UC_SEQ : c,
+      text : text
+    }
+    setNum(num +1);
+    const newList = commentList.concat(newComment);
+    setCommentList(newList);
+  }
+
+  const showComment = (c) => {
+    const cList = commentList.filter((a)=>(a.UC_SEQ === c))
+    return cList; 
+  }
+  
+  useEffect(()=>{getMenu()}, []);
   useEffect(()=>{
-    // menuList의 처음값이 빈값으로 들어감
-    // 빈값이 아닌 값이 들어갔을때 화면에 출력
     if(menuList.length>0) {
-        // 값이 들어왔다면 true로 바꿔서 화면출력
         setLoading(true);
     }
   }, [menuList])
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = menuList.slice(indexOfFirstItem, indexOfLastItem);
+  console.log(currentItems);
+  
+  const handleLoadMore = () => {
+    setCurrentPage(currentPage + 1);
+  }
 
   return (
     <div>
@@ -42,7 +66,7 @@ export default function Menu() {
         </div>
 
         <div className='box-wrap'>
-          {loading && menuList.map((item)=>(
+          {loading && currentItems.map((item)=>(
             <div 
             key={item.UC_SEQ}
             className='img-box'
@@ -62,22 +86,38 @@ export default function Menu() {
               >
               </div>
 
-              {/*<img src={item.MAIN_IMG_THUMB}></img>}*/}
-              <div className={lightimg ? 'light-box-on' : 'light-box-off'}
-              onClick={()=>{
-                setLightimg(null);
-              }}
-              > 
-                <div >
+              <div className={lightimg ? 'light-box-on' : 'light-box-off'}> 
+                <div>
+                  <button
+                  onClick={()=>{
+                    setLightimg(null);
+                  }}
+                  className="btn"
+                  >
+                    X
+                  </button>
                   <img src={lightimg}></img>
                   <br />
-                  <label htmlFor="">닉네임</label>
-                  <input type="text" />
                   <br />
                   <label htmlFor="">내용</label>
-                  <input type="text" />
+                  <input 
+                  type="text"
+                  onChange={(e)=>(setText(e.target.value))}
+                  value={text}
+                  />
                   <br />
-                  <button>등록</button>
+                  <button
+                  onClick={()=>{
+                    addComment(preComment);
+                    setText("");
+                  }}
+                  >
+                  등록
+                  </button>
+                  <hr />
+                  {loading && showComment(preComment).map((comment, i)=>(
+                    <p key={i}>익명 : {comment.text}</p>
+                  ))}
                 </div> 
               </div>
 
@@ -85,13 +125,19 @@ export default function Menu() {
               style={{backgroundImage: `url(${item.MAIN_IMG_THUMB})`}}
               onClick={()=>{
                 setLightimg(item.MAIN_IMG_THUMB)
+                setPreComment(item.UC_SEQ)
               }}              
               >
               </div>
               <h3>{item.MAIN_TITLE}</h3>
-              <p>{item.ITEMCNTNTS}</p>
+              <p>{item.ADDR1}</p>
+              <p>{item.USAGE_DAY_WEEK_AND_TIME}</p>
             </div>
           ))}
+          { currentItems.length === itemsPerPage && (
+            <button onClick={()=> {handleLoadMore()}}>Load More</button>
+            )      
+          }
         </div>
     </div>
   )

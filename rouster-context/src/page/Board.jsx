@@ -132,6 +132,7 @@ export default function Board() {
             </div>
         }
         <hr />
+        
         {/* 코멘트를 작성할 공간 */}
         <input type="text" 
             onChange={(e)=>{setText(e.target.value)}}

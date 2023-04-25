@@ -1,10 +1,22 @@
+@font-face {
+    font-family: 'BookkMyungjo-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+h3, p {
+    font-family: 'BookkMyungjo-Bd';
+    font-size: 0.9rem;
+}
 h1 {
     font-size: 2rem;
 }
-
 .box-wrap {
     max-width: 1200px;
     margin: auto;
+}
+.img {
+    border-radius: 20px;
 }
 .img-box {
     display: inline-block;
@@ -59,6 +71,11 @@ h1 {
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
     display: block;
+}
+.btn {
+    position: absolute;
+    top: 10px;
+    right: 460px;
 }
 .light-box-on div {
     width: 40%;

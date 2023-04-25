@@ -4,30 +4,38 @@ import { useEffect } from 'react';
 import '../css/menu.css'
 
 export default function Like() {
-  const [heart, setHeart] = useState([122]);
-
+  const [heart, setHeart] = useState([]);
   const [lightimg, setLightimg] = useState();
-
   const [menuList,setMenuList] = useState([]);
 
   const getMenu = async()=> {
     const promise = await fetch(
-      "http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=kbdzVMi2epmiXU2EiAFMtH8wc1aeUX7uisnfxHS26jeglsuSc0rdvJJbCYWgZfO5YlhZy0Bi%2Fl9XO9ufa5xdgQ%3D%3D&numOfRows=8&pageNo=2&resultType=json"
+      "http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=kbdzVMi2epmiXU2EiAFMtH8wc1aeUX7uisnfxHS26jeglsuSc0rdvJJbCYWgZfO5YlhZy0Bi%2Fl9XO9ufa5xdgQ%3D%3D&numOfRows=150&pageNo=1&resultType=json"
       );
     const response = await promise.json();
     setMenuList(response.getFoodKr.item);
   }
 
   const [loading, setLoading] = useState(false);
-  useEffect(()=>{getMenu();}, [])
+  useEffect(()=>{getMenu()}, [])
   useEffect(()=>{
     // menuList의 처음값이 빈값으로 들어감
     // 빈값이 아닌 값이 들어갔을때 화면에 출력
     if(menuList.length>0) {
         // 값이 들어왔다면 true로 바꿔서 화면출력
         setLoading(true);
-    }
+    } 
   }, [menuList])
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = menuList.slice(indexOfFirstItem, indexOfLastItem);
+  
+  const handleLoadMore = () => {
+    setCurrentPage(currentPage + 1);
+  }
 
   return (
     <div>
@@ -39,7 +47,7 @@ export default function Like() {
         <br />
         
         <div className='box-wrap'>
-          {loading && menuList.map((item)=>(
+          {loading && currentItems.map((item)=>(
             <div 
             key={item.UC_SEQ}
             className='img-box'
@@ -86,9 +94,13 @@ export default function Like() {
               >
               </div>
               <h3>{item.MAIN_TITLE}</h3>
-              <p>{item.ITEMCNTNTS}</p>
+              <p>{item.ADDR1}</p>
+              <p>{item.USAGE_DAY_WEEK_AND_TIME}</p>
             </div>
           ))}
+          {currentItems.length === itemsPerPage && (            
+                <button onClick={()=> {handleLoadMore()}}>Load More</button>
+          )}
         </div>
     </div>
   )
